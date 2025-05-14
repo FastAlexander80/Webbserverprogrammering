@@ -99,6 +99,7 @@ app.post("/anv", async(req, res)=>{
     }
 })
 
+
 app.get("/users", async(req, res)=>{
     let connection = await getConnection()
     let sql = `Select * FROM users`
@@ -113,7 +114,7 @@ app.get("/users/:id", async(req, res)=>{
     res.json(results)
 })
 
-app.get("/", (req, res) => {
+app.get("/1", (req, res) => {
     let users = [
         {
             name: "Alexander",
@@ -135,6 +136,9 @@ app.get("/hej/:id", (req,res) => {
 })
 app.get("/hej", (req,res)=>{
     res.send(req.query)
+})
+app.get("/", (req,res)=>{
+    res.send("<h1>Dokumentation av det här APIet</h1> <br> <h3>Viktiga Routes</h3> <br> <ul> <li>GET/users - Returnerar alla användare</li> <br> <li>GET/users/:id - Returnerar en user med angivet id</li> <br> <li>POST/anv - skapar en ny användare med ett hashat lösenord. Tar emot ett objekt i JSON format och lägger in i databasen</li> <br> <li> POST/anv/:id - Kollar så man finns i databasen och gör så att man kan ändra/uppdatera sitt lösenord och samtidigt lägger till ett salt och hashar det uppdaterade</li> <br> <li> POST/login - Icke färdig kod som kollar om man finns i databasen och skapar salt och hashning och ska fixa en token till användaren </li> <br> </ul> <br> <h3>Övriga Routes</h3> <br> <ul> <li>GET/gen-hash - Tar emot lösenordet i en databas och gör om den till ett hashat lösenord</li> <br> <li>GET/hej - ger en tom JSON objekt</li> <br> <li>GET/hej/:id - Ger en ett JSON objekt bestående av endast id</li> <br> <li>GET/1 - Skriver ut en lista med JSON objekt som är skrivet i koden</li></ul>")
 })
 
 app.listen(port, () => {
